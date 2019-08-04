@@ -35,7 +35,13 @@ namespace Regressions.Tests
             var entry = dbContext.Set<DummyModel>().Add(model);
             dbContext.SaveChanges();
 
-            Assert.True(true); // Save changes on 2.2.6 won't freak out, because required field is not set
+            Assert.True(true); // IMO 2.2.6 should freak out, because OwnedModel.RequiredField is not set
+
+            // I don't know how to test it via DB context's meta-data, please take a look at differences between:
+            //    OwnedEntityRequired => Migrations\3.0.0-preview7\20190804135006_Initial.cs
+            //    OwnedEntityRequired => Migrations\2.2.6\20190804134956_Initial.cs
+            // As you can see in one case RequiredField has 'nullable: true' and in the other 'nullable: false'
+            // IMO the latter is correct
         }
 
         [Fact]
