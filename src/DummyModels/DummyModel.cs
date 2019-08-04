@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace EmptyDbSet
+namespace DummyModels
 {
     public class DummyModel
     {
@@ -9,5 +9,7 @@ namespace EmptyDbSet
         [Key, Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
+
+        public OwnedModel OwnedModel { get; set; }
     }
 }

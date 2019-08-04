@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.0;netcoreapp2.1;netstandard2.1;netstandard2.0</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
@@ -20,7 +20,22 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DummyModels\DummyModels.csproj" />
-    <ProjectReference Include="..\Models\DummyModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.1' Or '$(TargetFramework)' == 'netcoreapp3.0' ">
+    <Compile Remove="Migrations\2.2.6\**" />
+    <EmbeddedResource Remove="Migrations\2.2.6\**" />
+    <None Remove="Migrations\2.2.6\**" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' Or '$(TargetFramework)' == 'netcoreapp2.1' ">
+    <Compile Remove="Migrations\3.0.0-preview7\**" />
+    <EmbeddedResource Remove="Migrations\3.0.0-preview7\**" />
+    <None Remove="Migrations\3.0.0-preview7\**" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace EmptyDbSet.Migrations
+namespace OwnedEntityRequired.Migrations._2._2._6
 {
     public partial class Initial : Migration
     {
@@ -12,7 +12,8 @@ namespace EmptyDbSet.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    RequiredField = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
