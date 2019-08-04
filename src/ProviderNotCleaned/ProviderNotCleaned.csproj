@@ -15,8 +15,12 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(EFCoreVersion)" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="$(EFCoreVersion)" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="$(EFCoreVersion)" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(EFCoreVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DummyModels\DummyModels.csproj" />
+    <ProjectReference Include="..\Models\DummyModels.csproj" />
   </ItemGroup>
 
 </Project>

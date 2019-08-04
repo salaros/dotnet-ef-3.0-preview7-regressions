@@ -14,6 +14,11 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MsTestSdk)" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(EFCoreVersion)" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="$(EFCoreVersion)" />
+  </ItemGroup>
+
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.1' ">
     <Reference Include="EmptyDbSet">
       <HintPath>$(SolutionDir)\bin\$(Configuration)\netstandard2.0\EmptyDbSet.dll</HintPath>
@@ -47,6 +52,18 @@
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.0' ">
     <Reference Include="ProviderNotCleaned">
       <HintPath>$(SolutionDir)\bin\$(Configuration)\netstandard2.1\ProviderNotCleaned.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.1' ">
+    <Reference Include="DummyModels">
+      <HintPath>$(SolutionDir)\bin\$(Configuration)\netstandard2.0\DummyModels.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.0' ">
+    <Reference Include="DummyModels">
+      <HintPath>$(SolutionDir)\bin\$(Configuration)\netstandard2.1\DummyModels.dll</HintPath>
     </Reference>
   </ItemGroup>
 
