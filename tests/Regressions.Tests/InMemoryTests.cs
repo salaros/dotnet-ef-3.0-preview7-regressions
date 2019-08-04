@@ -4,6 +4,8 @@ using OwnedEntityRequired;
 using Xunit;
 using DummyModels;
 using ProviderNotCleaned;
+using Microsoft.Data.Sqlite;
+using System.Diagnostics;
 
 namespace Regressions.Tests
 {
@@ -26,22 +28,31 @@ namespace Regressions.Tests
         [Fact]
         public void OwnedEntityRequired()
         {
+            var connection = new SqliteConnection("DataSource=:memory:");
+            connection.Open();
+
             var options = new DbContextOptionsBuilder<OwnedEntitytContext>();
             options.EnableSensitiveDataLogging();
-            options.UseInMemoryDatabase(nameof(OwnedEntityRequired));
+            options.UseSqlite(connection);
             var dbContext = new OwnedEntitytContext(options.Options);
+            dbContext.Database.EnsureCreated();
 
-            var model = new DummyModel();
-            dbContext.Set<DummyModel>().Add(model);
-            dbContext.SaveChanges();
 
-            Assert.True(true); // IMO 2.2.6 should freak out, because OwnedModel.RequiredField is not set
+            DummyModel model;
 
-            // I don't know how to test it via DB context's meta-data, please take a look at differences between:
-            //    OwnedEntityRequired => Migrations\3.0.0-preview7\20190804135006_Initial.cs
-            //    OwnedEntityRequired => Migrations\2.2.6\20190804134956_Initial.cs
-            // As you can see in one case RequiredField has 'nullable: true' and in the other 'nullable: false'
-            // IMO the latter is correct
+            try
+            {
+                model = new DummyModel { OwnedModel = new OwnedModel() };
+                dbContext.Set<DummyModel>().Add(model);
+                dbContext.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                Debug.WriteLine(ex.Message);
+                model = null;
+            }
+
+            Assert.Null(model);
         }
 
         [Fact]

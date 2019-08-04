@@ -36,7 +36,7 @@ namespace OwnedEntityRequired
             var optionsBuilder = new DbContextOptionsBuilder<OwnedEntitytContext>();
             optionsBuilder.EnableDetailedErrors();
             optionsBuilder.EnableSensitiveDataLogging();
-            optionsBuilder.UseSqlServer("Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=TestDb;Integrated Security=SSPI;");
+            optionsBuilder.UseSqlite("DataSource=:memory:");
             return new OwnedEntitytContext(optionsBuilder.Options);
         }
     }

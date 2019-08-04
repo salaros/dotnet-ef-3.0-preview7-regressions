@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OwnedEntityRequired.Migrations._3._0._0preview7
 {
@@ -12,7 +11,7 @@ namespace OwnedEntityRequired.Migrations._3._0._0preview7
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     RequiredField = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
