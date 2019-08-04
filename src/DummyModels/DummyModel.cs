@@ -10,6 +10,7 @@ namespace DummyModels
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
 
+        [Required]
         public OwnedModel OwnedModel { get; set; }
     }
 }

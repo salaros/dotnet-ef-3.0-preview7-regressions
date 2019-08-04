@@ -31,8 +31,8 @@ namespace Regressions.Tests
             options.UseInMemoryDatabase(nameof(OwnedEntityRequired));
             var dbContext = new OwnedEntitytContext(options.Options);
 
-            var model = new DummyModel { OwnedModel = new OwnedModel() };
-            var entry = dbContext.Set<DummyModel>().Add(model);
+            var model = new DummyModel();
+            dbContext.Set<DummyModel>().Add(model);
             dbContext.SaveChanges();
 
             Assert.True(true); // IMO 2.2.6 should freak out, because OwnedModel.RequiredField is not set

@@ -6,17 +6,17 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OwnedEntityRequired;
 
-namespace OwnedEntityRequired.Migrations._2._2._6
+namespace OwnedEntityRequired.Migrations._3._0._0preview7
 {
     [DbContext(typeof(OwnedEntitytContext))]
-    [Migration("20190804134956_Initial")]
+    [Migration("20190804144555_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "3.0.0-preview7.19362.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -47,10 +47,8 @@ namespace OwnedEntityRequired.Migrations._2._2._6
 
                             b1.ToTable("DummyModel");
 
-                            b1.HasOne("DummyModels.DummyModel")
-                                .WithOne("OwnedModel")
-                                .HasForeignKey("DummyModels.OwnedModel", "DummyModelId")
-                                .OnDelete(DeleteBehavior.Cascade);
+                            b1.WithOwner()
+                                .HasForeignKey("DummyModelId");
                         });
                 });
 #pragma warning restore 612, 618
