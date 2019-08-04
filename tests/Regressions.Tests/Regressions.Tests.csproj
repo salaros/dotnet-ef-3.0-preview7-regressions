@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp2.1;netcoreapp3.0</TargetFrameworks>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit" Version="$(XUnitVersion)" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="$(XUnitVersion)">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MsTestSdk)" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.1' ">
+    <Reference Include="EmptyDbSet">
+      <HintPath>$(SolutionDir)\bin\$(Configuration)\netstandard2.0\EmptyDbSet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.0' ">
+    <Reference Include="EmptyDbSet">
+      <HintPath>$(SolutionDir)\bin\$(Configuration)\netstandard2.1\EmptyDbSet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.1' ">
+    <Reference Include="OwnedEntityRequired">
+      <HintPath>$(SolutionDir)\bin\$(Configuration)\netstandard2.0\OwnedEntityRequired.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.0' ">
+    <Reference Include="OwnedEntityRequired">
+      <HintPath>$(SolutionDir)\bin\$(Configuration)\netstandard2.1\OwnedEntityRequired.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.1' ">
+    <Reference Include="ProviderNotCleaned">
+      <HintPath>$(SolutionDir)\bin\$(Configuration)\netstandard2.0\ProviderNotCleaned.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.0' ">
+    <Reference Include="ProviderNotCleaned">
+      <HintPath>$(SolutionDir)\bin\$(Configuration)\netstandard2.1\ProviderNotCleaned.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

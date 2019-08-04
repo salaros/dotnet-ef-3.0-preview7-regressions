@@ -1,0 +1,39 @@
+<Project>
+
+  <PropertyGroup>
+    <EFCoreVersion2>2.2.6</EFCoreVersion2>
+    <EFCoreVersion3>3.0.0-preview7.*</EFCoreVersion3>
+    <XUnitVersion>2.4.1</XUnitVersion>
+    <MsTestSdk>16.2.0</MsTestSdk>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <LangVersion>8.0</LangVersion>
+    <BuildInParallel>true</BuildInParallel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <EFCoreVersion>$(EFCoreVersion2)</EFCoreVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.1' ">
+    <EFCoreVersion>$(EFCoreVersion3)</EFCoreVersion>
+    <RuntimeFrameworkVersion>3.0.0-preview7-27912-14</RuntimeFrameworkVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
+    <OutputPath>$(SolutionDir)\bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\$(TargetFramework)\</IntermediateOutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(Configuration.Contains('Debug'))">
+    <DefineConstants>$(DefineConstants);DEBUG</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GenerateErrorForMissingTargetingPacks>false</GenerateErrorForMissingTargetingPacks>
+  </PropertyGroup>
+
+</Project>
