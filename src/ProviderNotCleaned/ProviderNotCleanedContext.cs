@@ -1,6 +1,8 @@
-﻿using DummyModels;
+﻿using System;
+using DummyModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ProviderNotCleaned
 {
@@ -19,6 +21,27 @@ namespace ProviderNotCleaned
             modelBuilder
                 .Entity<DummyModel>()
                 .OwnsOne(d => d.OwnedModel);
+
+            modelBuilder
+                .Entity<UniqueIdModel>()
+                .HasKey(u => u.UniqueId);
+
+            modelBuilder
+                .Entity<UniqueIdModel>()
+                .HasIndex(u => u.UniqueId)
+                .IsUnique();
+
+            modelBuilder
+                .Entity<UniqueIdModel>()
+                .Property(u => u.UniqueId)
+                .HasConversion(new GuidToStringConverter());
+
+            modelBuilder
+                .Entity<UniqueIdModel>()
+                .HasData(
+                    new UniqueIdModel { UniqueId = new Guid("8ac4b5f4-eac9-4fc7-b7a4-6a3ba0ae3556") },
+                    new UniqueIdModel { UniqueId = new Guid("509f3452-649f-4255-abb4-3608f3aa25db") }
+                );
         }
     }
 
